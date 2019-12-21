@@ -110,7 +110,7 @@ namespace MassTransitRPC
 
             foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
-            //    var contractTypes = assembly.GetTypes().Where(type => type.IsInterface && Attribute.IsDefined(type, contractAttributeType)); ;
+                var contractTypes = assembly.GetTypes().Where(type => type.IsInterface && Attribute.IsDefined(type, contractAttributeType)); ;
 
                 foreach (var contractType in contractTypes)
                 {
