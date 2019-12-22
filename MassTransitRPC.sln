@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29519.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MassTransitRPC", "MassTransitRPC\MassTransitRPC.csproj", "{ED0973D0-255B-46B4-8F37-50A2A03F79AC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Contracts", "Contracts\Identity.Contracts.csproj", "{AD3834C2-E648-4971-B40A-841E1A5100E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Contracts", "Identity.Contracts\Identity.Contracts.csproj", "{AD3834C2-E648-4971-B40A-841E1A5100E1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.Contracts.Implementation", "Identity.Contracts.Implementation\Identity.Contracts.Implementation.csproj", "{53C3C349-E2E3-4AEE-919D-2D49B6F15E50}"
 EndProject
