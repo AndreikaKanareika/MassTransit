@@ -13,8 +13,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Common.Contracts\Common.Contracts.csproj" />
-    <ProjectReference Include="..\Contracts\Identity.Contracts.csproj" />
     <ProjectReference Include="..\Identity.Contracts.Implementation\Identity.Contracts.Implementation.csproj" />
+    <ProjectReference Include="..\Identity.Contracts\Identity.Contracts.csproj" />
   </ItemGroup>
 
 

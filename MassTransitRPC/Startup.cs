@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using Common.Contracts;
 using Identity.Contracts;
+using Identity.Contracts.Implementation.Contracts.SignIn;
 using MassTransit;
 using MassTransitRPC.Filters;
 using Microsoft.AspNetCore.Builder;
@@ -96,7 +97,7 @@ namespace MassTransitRPC
             //services.AddScoped(x => bus.CreateRequestClient<ISignInRequest>(new Uri("rabbitmq://localhost/signIn")));
             // ConfigureRequestResponseContracts(services, rabbitMQTimeoutInSeconds);
 
-            var x = services.BuildServiceProvider().GetService<IRequestClient<ISignInRequest>>();
+            var x = services.BuildServiceProvider().GetService<IRequestClient<SignInRequest>>();
 
             bus.Start();
         }
