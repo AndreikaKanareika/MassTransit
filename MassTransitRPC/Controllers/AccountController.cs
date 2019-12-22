@@ -4,7 +4,6 @@ using MassTransit;
 using MassTransitRPC.Exceptions;
 using MassTransitRPC.Models;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Threading.Tasks;
 
 namespace MassTransitRPC.Controllers
