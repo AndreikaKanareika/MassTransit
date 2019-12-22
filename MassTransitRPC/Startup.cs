@@ -94,10 +94,6 @@ namespace MassTransitRPC
             services.AddSingleton<IBus>(bus);
 
             ConfigureRequest(services, bus, rabbitMQTimeoutInSeconds);
-            //services.AddScoped(x => bus.CreateRequestClient<ISignInRequest>(new Uri("rabbitmq://localhost/signIn")));
-            // ConfigureRequestResponseContracts(services, rabbitMQTimeoutInSeconds);
-
-            var x = services.BuildServiceProvider().GetService<IRequestClient<SignInRequest>>();
 
             bus.Start();
         }
@@ -129,106 +125,5 @@ namespace MassTransitRPC
                 }
             }
         }
-
-
-        //#region Request-Response Contracts Configuration
-
-        //private class RequestResponseMatching
-        //{
-        //    public Type RequestType { get; set; }
-        //    public Type ResponseType { get; set; }
-        //}
-
-        //private void ConfigureRequestResponseContracts(IServiceCollection services, int rabbitMQTimeoutInSeconds)
-        //{
-        //    var requestResponseMatchings = new Dictionary<string, RequestResponseMatching>();
-        //    var contractAttributeType = typeof(RequestResponseContractAttribute);
-
-
-        //    foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
-        //    {
-        //        var contractTypes = assembly.GetTypes().Where(type => type.GetInterface(typeof(IMessage).FullName) != null && Attribute.IsDefined(type, contractAttributeType)); ;
-
-        //        foreach (var contractType in contractTypes)
-        //        {
-        //            var attribute = contractType.GetCustomAttributes(contractAttributeType, true).First() as RequestResponseContractAttribute;
-        //            var contractName = attribute.Contract;
-
-        //            if (contractType.GetInterface(typeof(IRequest).FullName) != null)
-        //            {
-        //                AddRequest(requestResponseMatchings, contractName, contractType);
-        //            }
-        //            else if (contractType.GetInterface(typeof(IResponse).FullName) != null)
-        //            {
-        //                AddResponse(requestResponseMatchings, contractName, contractType);
-        //            }
-        //            else
-        //            {
-        //                throw new Exception($"Invalid contract : {contractType}");
-        //            }
-        //        }
-        //    }
-
-        //    foreach (var rrm in requestResponseMatchings)
-        //    {
-        //        var dependencies = new[] { rrm.Value.RequestType as Type, rrm.Value.ResponseType as Type };
-        //        var requestClientType = typeof(IRequestClient<,>).MakeGenericType(dependencies);
-
-        //        services.AddScoped(requestClientType, x =>
-        //        {
-        //            var messageRequestClientType = typeof(MessageRequestClient<,>).MakeGenericType(dependencies);
-        //            var constructor = messageRequestClientType
-        //                .GetConstructor(new Type[]
-        //                {
-        //                    typeof(IBus),
-        //                    typeof(Uri),
-        //                    typeof(TimeSpan),
-        //                    typeof(TimeSpan?),
-        //                    typeof(Action<>).MakeGenericType(
-        //                        typeof(SendContext<>).MakeGenericType(rrm.Value.RequestType)
-        //                    )
-        //                });
-
-        //            return constructor.Invoke(new object[] {
-        //                x.GetRequiredService<IBus>(),
-        //                new Uri(Configuration[$"RabbitMQ:Uri:{rrm.Key}"]),
-        //                TimeSpan.FromSeconds(rabbitMQTimeoutInSeconds),
-        //                null,
-        //                null
-        //            });
-        //        });
-        //    }
-        //}
-
-        //private void AddRequest(Dictionary<string, RequestResponseMatching> requestResponseMatchings, string contractName, Type request)
-        //{
-        //    if (requestResponseMatchings.TryGetValue(contractName, out var dep))
-        //    {
-        //        dep.RequestType = dep.RequestType == null
-        //            ? request
-        //            : throw new Exception($"Duplicated request contract : { contractName }");
-        //    }
-        //    else
-        //    {
-        //        requestResponseMatchings.Add(contractName, new RequestResponseMatching { RequestType = request });
-        //    }
-        //}
-
-        //private void AddResponse(Dictionary<string, RequestResponseMatching> requestResponseMatchings, string contractName, Type response)
-        //{
-        //    if (requestResponseMatchings.TryGetValue(contractName, out var dep))
-        //    {
-        //        dep.ResponseType = dep.ResponseType == null
-        //            ? response
-        //            : throw new Exception($"Duplicated response contract : { contractName }");
-        //    }
-        //    else
-        //    {
-        //        requestResponseMatchings.Add(contractName, new RequestResponseMatching { ResponseType = response });
-        //    }
-        //}
-
-        //#endregion
-
     }
 }

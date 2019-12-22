@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace MassTransitRPC
+namespace Identity.Microservice
 {
     public class Program
     {
