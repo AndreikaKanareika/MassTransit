@@ -1,7 +1,6 @@
 ﻿using Common.Contracts;
 using Identity.Contracts;
 using MassTransit;
-using System;
 using System.Threading.Tasks;
 
 namespace Identity.Microservice
@@ -21,11 +20,7 @@ namespace Identity.Microservice
             }
             else
             {
-                await context.RespondAsync<ISignInResponse>(new
-                {
-                    Token = "123",
-                    ExpirationDate = DateTime.Today.AddDays(1)
-                });
+                await context.RespondAsync<ISignInResponse>(new SignInResponseSuccess { Token = "123" });
             }             
         }
     }
