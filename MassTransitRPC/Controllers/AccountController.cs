@@ -2,6 +2,7 @@
 using Identity.Contracts;
 using MassTransit;
 using MassTransitRPC.Exceptions;
+using MassTransitRPC.Extension;
 using MassTransitRPC.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -26,16 +27,11 @@ namespace MassTransitRPC.Controllers
         [HttpPost("signin")]
         public async Task<IActionResult> SignIn(SignInRequestModel signInRequest)
         {
-            var (succeedResponseTask, failedResponseTask) = await _signInRequestClient.GetResponse<ISignInResponse, IFailedResponse>(signInRequest);
+            var response = await _signInRequestClient
+                .GetResponse<ISignInResponse, IFailedResponse>(signInRequest)
+                .GetMessage();
 
-            if (failedResponseTask.IsCompletedSuccessfully)
-            {
-                var failedResponse = await failedResponseTask;
-                throw new FailedResponseException(failedResponse.Message);
-            }
-
-            var respone = await succeedResponseTask;
-            return Ok(respone.Message);
+            return Ok(response);
         }
     }
 }
