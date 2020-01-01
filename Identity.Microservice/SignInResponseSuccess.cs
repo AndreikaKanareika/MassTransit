@@ -1,11 +1,9 @@
 ﻿using Identity.Contracts;
-using System;
 
-namespace Identity.Mircoservice
+namespace Identity.Microservice
 {
     public class SignInResponseSuccess : ISignInResponse
     {
         public string Token { get; set; }
-        public DateTime ExpirationDate { get; set; }
     }
 }

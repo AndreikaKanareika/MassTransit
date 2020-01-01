@@ -3,8 +3,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Common.Contracts;
-using Identity.Contracts;
-using Identity.Contracts.Implementation.Contracts.SignIn;
 using MassTransit;
 using MassTransitRPC.Filters;
 using Microsoft.AspNetCore.Builder;
@@ -49,8 +47,6 @@ namespace MassTransitRPC
             ConfigureBus(services);
         }
 
-     
-
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -78,8 +74,6 @@ namespace MassTransitRPC
             });
         }
 
-
-
         private void ConfigureBus(IServiceCollection services)
         {
             var rabbitMQTimeoutInSeconds = Configuration.GetValue<int>("RabbitMQ:TimeoutInSeconds");
@@ -98,16 +92,16 @@ namespace MassTransitRPC
             bus.Start();
         }
 
-
         private void ConfigureRequest(IServiceCollection services, IBus bus, int rabbitMQTimeoutInSeconds)
         {
             var contractAttributeType = typeof(RequestContractAttribute);
             var factory = bus.CreateClientFactory(RequestTimeout.After(s: rabbitMQTimeoutInSeconds));
             var methodInfo = factory.GetType().GetMethod("CreateRequestClient", new Type[] { typeof(Uri), typeof(RequestTimeout) });
 
-            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            foreach (var assemblyName in Assembly.GetExecutingAssembly().GetReferencedAssemblies())
             {
-                var contractTypes = assembly.GetTypes().Where(type => type.IsInterface && Attribute.IsDefined(type, contractAttributeType)); ;
+                var assembly = AppDomain.CurrentDomain.Load(assemblyName);
+                var contractTypes = assembly.GetTypes().Where(type => type.IsInterface && Attribute.IsDefined(type, contractAttributeType));
 
                 foreach (var contractType in contractTypes)
                 {

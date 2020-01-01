@@ -35,7 +35,7 @@ namespace MassTransitRPC.Filters
                     obj = new
                     {
                         Message = "Error =(",
-                        DeveloperMessage = context.Exception
+                        DeveloperMessage = $"{context.Exception.Message}\n{context.Exception.StackTrace}"
                     };
                 }
                 else

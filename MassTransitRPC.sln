@@ -7,11 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MassTransitRPC", "MassTrans
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Contracts", "Identity.Contracts\Identity.Contracts.csproj", "{AD3834C2-E648-4971-B40A-841E1A5100E1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Contracts.Implementation", "Identity.Contracts.Implementation\Identity.Contracts.Implementation.csproj", "{53C3C349-E2E3-4AEE-919D-2D49B6F15E50}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Contracts", "Common.Contracts\Common.Contracts.csproj", "{79004E87-22A2-45C2-BEB2-B8B44A5142C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.Microservice", "Identity.Microservice\Identity.Microservice.csproj", "{124A5218-3FA6-486A-B7E6-01DDCA8B3F36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Microservice", "Identity.Microservice\Identity.Microservice.csproj", "{124A5218-3FA6-486A-B7E6-01DDCA8B3F36}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,10 +25,6 @@ Global
 		{AD3834C2-E648-4971-B40A-841E1A5100E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD3834C2-E648-4971-B40A-841E1A5100E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD3834C2-E648-4971-B40A-841E1A5100E1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{53C3C349-E2E3-4AEE-919D-2D49B6F15E50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{53C3C349-E2E3-4AEE-919D-2D49B6F15E50}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{53C3C349-E2E3-4AEE-919D-2D49B6F15E50}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{53C3C349-E2E3-4AEE-919D-2D49B6F15E50}.Release|Any CPU.Build.0 = Release|Any CPU
 		{79004E87-22A2-45C2-BEB2-B8B44A5142C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{79004E87-22A2-45C2-BEB2-B8B44A5142C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79004E87-22A2-45C2-BEB2-B8B44A5142C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
