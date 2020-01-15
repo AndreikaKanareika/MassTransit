@@ -1,12 +1,9 @@
-using Common.Contracts;
-using Identity.Microservice.FakeRepository;
-using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
+using MassTransit;
 
 namespace Identity.Microservice
 {
@@ -21,18 +18,7 @@ namespace Identity.Microservice
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IPersonDB, PersonDB>();
-
             services.AddControllers();
-
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Version = "v1",
-                    Title = "Test API"
-                });
-            });
 
             ConfigureBus();
         }
@@ -54,25 +40,16 @@ namespace Identity.Microservice
             {
                 endpoints.MapControllers();
             });
-            
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Test API V1");
-                c.RoutePrefix = string.Empty;
-            });
         }
 
 
         private void ConfigureBus()
         {
-            IPersonDB repo = new PersonDB(); // is there another way??
-
             Bus.Factory.CreateUsingRabbitMq(cfg =>
             {
                 var host = cfg.Host(Configuration["RabbitMQ:Uri:Host"]);
 
-                cfg.ReceiveEndpoint(host, "signIn", e => e.Consumer(()=>new SignInConsumer(repo)));
+                cfg.ReceiveEndpoint(host, "signIn", e => e.Consumer<SignInConsumer>());
 
             }).Start();
         }

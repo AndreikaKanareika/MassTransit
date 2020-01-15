@@ -7,9 +7,9 @@ namespace MassTransitRPC.Exceptions
     {
         public IFailedResponse FailedResponse { get; }
 
-        public FailedResponseException(IFailedResponse failedResponse)
+        public FailedResponseException(IFailedResponse failedResppnse)
         {
-            FailedResponse = failedResponse;
+            FailedResponse = failedResppnse;
         }
     }
 }
